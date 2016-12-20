@@ -428,6 +428,9 @@ func (this *Spider) pageProcess(req *request.Request) {
 	if !p.IsSucc() { // if fail do not need process
 		return
 	}
+	if !this.IsUrlAllowded(req) {
+		return
+	}
 
 	this.pPageProcesser.Process(p)
 	for _, req := range p.GetTargetRequests() {
