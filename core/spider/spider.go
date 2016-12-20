@@ -382,8 +382,6 @@ func (this *Spider) isUrlBlackList(urlStr string) bool {
 	return false
 }
 func (this *Spider) IsUrlAllowded(req *request.Request) bool {
-	this.lock.RLock()
-	defer this.lock.RUnlock()
 	if !this.isUrlWhiteListEnabled() {
 		return !this.isUrlBlackList(req.GetUrl())
 	}
