@@ -159,7 +159,6 @@ func (this *Spider) Run() {
 		go func(req *request.Request) {
 			defer this.mc.FreeOne()
 			//time.Sleep( time.Duration(rand.Intn(5)) * time.Second)
-			mlog.StraceInst().Println("start crawl : " + req.GetUrl())
 			this.pageProcess(req)
 		}(req)
 	}
@@ -429,9 +428,11 @@ func (this *Spider) pageProcess(req *request.Request) {
 		return
 	}
 	if !this.IsUrlAllowded(req) {
+		mlog.StraceInst().Println("skip : " + req.GetUrl())
 		return
 	}
 
+	mlog.StraceInst().Println("start crawl : " + req.GetUrl())
 	this.pPageProcesser.Process(p)
 	for _, req := range p.GetTargetRequests() {
 		this.AddRequest(req)
