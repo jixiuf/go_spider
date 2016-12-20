@@ -357,7 +357,7 @@ func (this *Spider) isUrlWhiteList(urlStr string) bool {
 			continue
 		}
 
-		if strings.Contains(urlStr, whiteUrlPattern) {
+		if strings.Contains(strings.ToLower(urlStr), strings.ToLower(whiteUrlPattern)) {
 			return true
 		}
 
@@ -375,7 +375,7 @@ func (this *Spider) isUrlBlackList(urlStr string) bool {
 		if blackUrlPattern == "" {
 			continue
 		}
-		if strings.Contains(urlStr, blackUrlPattern) {
+		if strings.Contains(strings.ToLower(urlStr), strings.ToLower(blackUrlPattern)) {
 			return true
 		}
 	}
